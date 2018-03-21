@@ -17,6 +17,8 @@
 #include <gazebo/common/common.hh>
 #include <gazebo/physics/physics.hh>
 
+#include <geometry_msgs/PoseStamped.h> //TODO stamped maybe?
+
 class RttGazeboGetPose: public RTT::TaskContext {
 public:
     RttGazeboGetPose(std::string const & name);
@@ -29,22 +31,21 @@ public:
 
 private:
 	// Declare ports and their datatypes    
-    gazebo::physics::ModelPtr model, coman;
+    gazebo::physics::ModelPtr model;//, coman;
 //    gazebo::physics::JointPtr joint;
-    gazebo::physics::LinkPtr  link;
+//    gazebo::physics::LinkPtr  link;
 //    gazebo::physics::BasePtr  object;
 
 //    RTT::OutputPort<rstrt::geometry::Pose>  pose_out_port;
 //    rstrt::geometry::Pose                   pose_out_data;
-    RTT::OutputPort<rstrt::robot::JointState> position_as_joint_out_port;
-    rstrt::robot::JointState                  position_as_joint_out_data;
 
-    //waist pose as joint angles :|
-    RTT::OutputPort<rstrt::robot::JointState> waist_pose_as_joint_out_port;
-    rstrt::robot::JointState                  waist_pose_as_joint_out_data;
+    RTT::OutputPort<geometry_msgs::PoseStamped> ball_pose_out_port;
+    geometry_msgs::PoseStamped ball_pose_out_data;
 
 
     std::string object_name;
+
+    std::string publish_topic;
 };
 
 #endif // RTTGAZEBOGETPOSE_HPP

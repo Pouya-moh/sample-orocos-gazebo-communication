@@ -13,6 +13,9 @@ project(orocos-gazebo-getPose-component)
  
 # current source and include:
 include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(/home/pmo/.local/rtt_ros_integration/include/orocos/)
+include_directories(/opt/ros/kinetic/include)
+link_directories(/home/pmo/.local/rtt_ros_integration/lib)
 
 add_definitions(-std=c++11)
  
@@ -35,6 +38,8 @@ if (gazebo_FOUND)
 	endif()
 	include_directories(${GAZEBO_INCLUDE_DIRS})
 endif()
+
+find_package(rtt_sensor_msgs REQUIRED)
 
 # Defines the orocos_* cmake macros. See that file for additional
 # documentation.
@@ -94,7 +99,12 @@ orocos_component(${CMAKE_PROJECT_NAME} ${PROJECT_SOURCE_DIR}/include/RttGazeboGe
 # You may add multiple orocos_plugin/orocos_service statements.
 
 # target_link_libraries()
-target_link_libraries(${CMAKE_PROJECT_NAME} ${RST-RT_LIBRARIES} ${RTT-CORE-EXTENSIONS_LIBRARIES} ${GAZEBO_LIBRARIES})
+target_link_libraries(${CMAKE_PROJECT_NAME}
+    ${RST-RT_LIBRARIES}
+    ${RTT-CORE-EXTENSIONS_LIBRARIES}
+    ${GAZEBO_LIBRARIES}
+    librtt_rostopic-gnulinux.so
+    librtt_rosclock-gnulinux.so)
  
 #
 # Additional headers (not in typekit):
