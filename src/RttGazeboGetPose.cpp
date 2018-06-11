@@ -52,7 +52,7 @@ void RttGazeboGetPose::updateHook() {
     position_as_joint_out_data.angles(1) = pose_ball.pos.y;
     position_as_joint_out_data.angles(2) = pose_ball.pos.z;
 
-    std::cout<<position_as_joint_out_data.angles.transpose()<<std::endl;
+//    std::cout<<position_as_joint_out_data.angles.transpose()<<std::endl;
 
     position_as_joint_out_port.write(position_as_joint_out_data);
 
